@@ -39,14 +39,6 @@ class _WrappedKoreanTextState extends State<WrappedKoreanText> {
   List<List<Text>> _paragraphsList = [];
   int _startIndex = 0;
 
-  @override
-  void initState() {
-    parceText();
-    addParagraphs();
-
-    super.initState();
-  }
-
   void parceText() {
     _specialCharacterIndexes.clear();
 
@@ -83,7 +75,7 @@ class _WrappedKoreanTextState extends State<WrappedKoreanText> {
             .toList());
 
         if (index.values.single.isNotEmpty) {
-          _paragraphsList.add([Text('')]);
+          _paragraphsList.add([]);
         }
       }
 
@@ -111,6 +103,12 @@ class _WrappedKoreanTextState extends State<WrappedKoreanText> {
 
   @override
   Widget build(BuildContext context) {
+    _startIndex = 0;
+    _paragraphsList.clear();
+
+    parceText();
+    addParagraphs();
+
     return wrappedText();
   }
 }
